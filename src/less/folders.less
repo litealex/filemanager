@@ -1,0 +1,25 @@
+.fm-folders {
+  float: left;
+  width: 200px;
+  height: 100%;
+  overflow-y: auto;
+  &-tree {
+    list-style: none;
+    padding-left: 15px;
+
+    &-item {
+      cursor: pointer;
+      a {
+        text-decoration: none;
+      }
+      &.active a {
+        color: #cc0000;
+        font-weight: bold;
+      }
+
+      &.expandable {
+        margin-left: -15px;
+      }
+    }
+  }
+}

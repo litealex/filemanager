@@ -1,0 +1,30 @@
+<div class="fm-folders">
+
+    <ul class="fm-folders-tree"
+        ng-include="'node'" >
+    </ul>
+
+    <script type="text/ng-template" id="node">
+        <li class="fm-folders-tree-item"
+            ng-class="{'active': isActive(node),
+                       'expandable': node.folders.length }">
+            <i class="fm-icon"
+               ng-if="node.folders.length"
+               ng-click="toggleExpand(node)"
+               ng-class="{'plus': !node.expanded, 'minus': node.expanded}"></i>
+            <i class="fm-icon folder"></i>
+            <a ng-click="select(node)" href="">
+                {{node.name}} {{data}}
+            </a>
+        </li>
+        <li ng-if="node.folders.length && node.expanded">
+            <ul class="fm-folders-tree">
+                <li
+                    ng-repeat="folder in node.folders"
+                    ng-include="'node'" onload="node=folder">
+                </li>
+            </ul>
+        </li>
+
+</script>
+</div>

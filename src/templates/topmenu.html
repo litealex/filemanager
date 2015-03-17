@@ -1,0 +1,53 @@
+<div class="btn-group btn-group-xs">
+    <button class="btn btn-default menu_btn"
+            type="button"
+            fm-dialog="newfolder">
+        <i class="fm-icon folder-add"></i>
+        Создать папку
+    </button>
+    <button class="btn btn-default menu_btn"
+            type="button"
+            ng-if="isFolderSelected"
+            ng-click="removeFolder()"
+            fm-dialog="removeConfirm"
+            fm-dialog-data="{what:'папку', remove: 'removeFolder'}">
+        <i class="fm-icon folder-del"></i>
+        Удалить папку
+    </button>
+    <button class="btn btn-default menu_btn"
+            type="button"
+            fm-dialog="upload"
+            ng-if="isFolderSelected">
+        <i class="fm-icon upload"></i>
+        Загрузить файлы
+    </button>
+    <button class="btn btn-default menu_btn"
+            type="button"
+            ng-if="selectedFiles.length"
+            fm-dialog="removeConfirm"
+            fm-dialog-data="{what:'файлы', remove: 'removeFiles'}">
+        <i class="fm-icon file-del"></i>
+        Удалить файлы
+    </button>
+    <button class="btn btn-default menu_btn"
+            type="button"
+            ng-if="selectedFiles.length"
+            ng-click="copyFiles()">
+        <i class="fm-icon file-copy"></i>
+        Копировать файлы
+    </button>
+    <button class="btn btn-default menu_btn"
+            type="button"
+            ng-if="selectedFiles.length"
+            ng-click="moveFiles()">
+        <i class="fm-icon file-cut"></i>
+        Переместить файлы
+    </button>
+    <button class="btn btn-default menu_btn"
+            type="button"
+            ng-click="pastFiles()"
+            ng-if="isCopied">
+        <i class="fm-icon file-paste"></i>
+        Вставить
+    </button>
+</div>
