@@ -6,7 +6,8 @@
     angular.module('fm')
         .directive('fileManager', ['$parse', 'fmConfig', 'fmSrv', fileManager]);
 
-    function fileManager(fmConfig, fmSrv) {
+    function fileManager($parse, fmConfig, fmSrv) {
+        console.log(fmConfig);
         return {
             restrict: 'E',
             replace: true,
