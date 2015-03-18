@@ -41,7 +41,9 @@
                             .map(function (file) {
                                 return file.name
                             }),
-                        from: buffer.from
+                        from: buffer.from[buffer.from.length - 1] == '/'
+                            ? buffer.from
+                            : buffer.from + '/'
                     })
                 }
             });

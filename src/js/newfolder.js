@@ -9,6 +9,7 @@
                 type: 'createFolder',
                 folderName: folderName
             });
+            $scope.close();
         };
     }
 

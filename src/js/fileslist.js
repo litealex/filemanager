@@ -9,13 +9,20 @@
 
 
     function FilesListController($scope, fmSrv) {
+        $scope.viewName = 'list';
         $scope.$on('fmChange', function (e, data) {
-            if (data.type === 'reloadFiles') {
-                fmSrv
-                    .loadFiles(data.path)
-                    .then(function (files) {
-                        $scope.files = files;
-                    });
+            switch (data.type) {
+                case 'reloadFiles':
+                    fmSrv
+                        .loadFiles(data.path + '/')
+                        .then(function (files) {
+                            $scope.path = data.path;
+                            $scope.files = files;
+                        });
+                    return;
+                case 'changeView':
+                    $scope.viewName = data.viewName;
+                    return;
             }
         });
 
@@ -34,9 +41,7 @@
             restrict: 'E',
             replace: true,
             controller: 'FilesListController',
-            templateUrl: fmConfig.getTemplateUrl('fileslist'),
-            link: function () {
-            }
+            templateUrl: fmConfig.getTemplateUrl('fileslist')
         }
     }
 }());

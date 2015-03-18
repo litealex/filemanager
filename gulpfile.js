@@ -10,7 +10,12 @@ var htmlPath = './src/templates/*.html',
     jsPath = './src/js/*.js';
 
 
-
+gulp.task('build', function(){
+    gulp.src(jsPath)
+        .pipe(concat('fm.min.js'))
+        .pipe(uglify({}))
+        .pipe(gulp.dest('./dist'));
+});
 
 gulp.task('dev:watch', function () {
     gulp.watch(jsPath, ['dev:copy-js']);

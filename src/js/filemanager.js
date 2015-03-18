@@ -33,7 +33,7 @@
                             return;
                         case 'pastFiles':
                             scope.buffer.to = currentPath;
-                            fmSrv.past(scope.buffer);
+                            fmSrv.past(scope.buffer).then(reloadFiles);
                             return;
                         case 'removeFiles':
                             fmSrv.removeFiles(currentPath, scope.selectedFiles)
@@ -59,6 +59,7 @@
                                         type: 'selectFolder',
                                         path: newFolderPath
                                     });
+                                    reloadFolders();
                                 });
                             return;
                         case 'removeFolder':
@@ -69,6 +70,7 @@
                                         type: 'selectFolder',
                                         path: currentPath.split('/').slice(0, -1).join('/')
                                     });
+                                    reloadFolders();
                                 });
                             return;
                         case 'uploadFiles':
@@ -88,15 +90,25 @@
                             reloadFiles();
                             reloadFolders();
                             return;
+                        case 'changeView':
+                            scope.$broadcast('fmChange',{
+                                type: 'changeView',
+                                viewName: data.viewName
+                            });
+                            return;
 
                     }
                 });
 
                 scope.insert = function () {
                     var newScope;
+                    console.log(scope.$parent);
                     if (attrs.onSelect) {
                         newScope = scope.$parent.$new();
-                        newScope.$files = scope.selectedFiles;
+                        newScope.$files = {
+                            list:scope.selectedFiles,
+                            path: currentPath
+                        };
                         $parse(attrs.onSelect)(newScope);
                     }
                 };
@@ -108,12 +120,12 @@
                     });
                 }
 
-
                 function reloadFolders() {
                     scope.$broadcast('fmChange', {
                         type: 'reloadFolders'
                     });
                 }
+
             }
         };
     }

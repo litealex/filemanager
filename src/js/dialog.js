@@ -26,18 +26,24 @@
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
+                var $dialog,
+                    offset,
+                    dialogScope = scope.$new(),
+                    close = function () {
+                        if ($dialog) {
+                            $dialog.remove();
+                        }
+                        dialogScope = null;
+                        $dialog = null;
+                    };
                 element.on('click', function () {
-                    var $dialog = angular.element('<div style="display: none;" class="fm-dialog"></div>'),
-                        offset = getOffset(element[0]),
-                        dialogScope = scope.$new();
+                    $dialog = angular.element('<div style="display: none;" class="fm-dialog"></div>');
+                    offset = getOffset(element[0]);
+                    dialogScope = scope.$new();
+
 
                     angular.extend(dialogScope, {
-                        close: function () {
-                            $dialog.remove();
-                            //dialogScope.$destroy();
-                            dialogScope = null;
-                            $dialog = null;
-                        }
+                        close: close
                     });
 
                     if (attrs.fmDialogData) {
@@ -54,6 +60,10 @@
                             $dialog[0].style.cssText = 'left:' + offset.left + 'px;top:' + offset.top + 'px;';
                         });
 
+                });
+
+                scope.$on('$destroy', function () {
+                    close();
                 });
             }
         }

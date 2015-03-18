@@ -8,6 +8,12 @@
     function RigthMenuController($scope) {
         $scope.type = 'list';
 
+        $scope.$on('fmChange', function (e, data) {
+            if (data.type === 'changeView') {
+                $scope.type = data.viewName;
+            }
+        });
+
         $scope.setView = function (viewName) {
             $scope.$emit('fmEvent', {
                 type: 'changeView',
