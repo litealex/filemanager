@@ -66,8 +66,8 @@
 
             fd.append('virtualpath', path);
             fd.append('c', 'upload');
-            files.forEach(function (file) {
-                fd.append('files[]', file);
+            files.forEach(function (file, i) {
+                fd.append('files['+i+']', file);
             });
 
             xhr.open('POST', fmConfig.actionsUrl);
