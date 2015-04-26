@@ -7,7 +7,6 @@
         .directive('fileManager', ['$parse', 'fmConfig', 'fmSrv', fileManager]);
 
     function fileManager($parse, fmConfig, fmSrv) {
-        console.log(fmConfig);
         return {
             restrict: 'E',
             replace: true,
@@ -102,7 +101,6 @@
 
                 scope.insert = function () {
                     var newScope;
-                    console.log(scope.$parent);
                     if (attrs.onSelect) {
                         newScope = scope.$parent.$new();
                         newScope.$files = {
