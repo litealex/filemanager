@@ -1,0 +1,22 @@
+<div class="fm-right-menu pull-right">
+    <div class="btn-group btn-group-xs">
+        <button ng-class="{ active: type === 'list' }" title="Список"
+                ng-click="setView('list')"
+                type="button"
+                class="btn btn-default">
+            <i class="glyphicon glyphicon-th-list"></i>
+        </button>
+        <button ng-class="{ active: type === 'preview' }" title="Иконки"
+                ng-click="setView('preview')"
+                type="button"
+                class="btn btn-default">
+            <i class="glyphicon glyphicon-th"></i>
+        </button>
+        <button title="Обновить"
+                ng-click="refresh()"
+                type="button"
+                class="btn btn-default">
+            <i class="glyphicon glyphicon-refresh"></i>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="">
+    <table ng-if="viewName =='list' " class="table">
+        <tr>
+            <th>
+                <i class="glyphicon glyphicon-unchecked"></i>
+            </th>
+            <th>Файл</th>
+            <th>Размер</th>
+            <th>Дата</th>
+        </tr>
+        <tr ng-repeat="file in files"
+            ng-click="file.selected = !file.selected"
+            ng-class="{'success':file.selected}"
+            class="fm-files-list-file">
+            <td>
+                <i class="glyphicon"
+                   ng-class="{
+                        'glyphicon-unchecked':!file.selected,
+                        'glyphicon-check':file.selected
+                        }"></i>
+            </td>
+            <td>
+                <img fm-file-ext="{{file.name}}"
+                     class="files-list-ext"/>
+                {{file.name}}
+            </td>
+            <td>{{file.size}}</td>
+            <td>{{file.date}}</td>
+        </tr>
+    </table>
+
+    <ul ng-if="viewName=='preview'"
+        class="fm-files-preview">
+        <li ng-repeat="file in files"
+            class="fm-files-preview-file">
+            <label ng-click="file.selected = !file.selected"
+                   class="fm-files-preview-label">
+                <i ng-if="file.selected"
+                   class="fm-files-preview-icon glyphicon glyphicon-check"></i>
+
+                <div fm-file-prefix="{{path}}"
+                     fm-file="{{file.name}}"
+                     class="fm-files-preview-wrapper"></div>
+                <div class="fm-files-preview-title"
+                     title="{{file.name}}">
+                    {{file.name}}
+                </div>
+            </label>
+        </li>
+    </ul>
+
+</div>
